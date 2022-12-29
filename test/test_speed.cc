@@ -135,7 +135,39 @@ struct ExprData2 {
 
 
 
-// C++ evaluation of expression "v1 + v2 + v3 + v4"
+// // C++ evaluation of expression "template"
+// void expr(ExprData &data) {
+// 	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+// 		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+// 			uint j = i_comp + data.simd_size*data.subset[i];
+// 			for(uint k = 0; k<data.simd_size; k++) {
+// 				double v1 = data.v1[j+k];
+// 				double v2 = data.v2[j+k];
+// 				double v3 = data.v3[j+k];
+// 				double v4 = data.v4[j+k];
+// 				double cv1 = data.cv1[i_comp/data.vec_size];
+// 				data.vres[j+k] = 
+// 			}
+// 		}
+// 	}
+// }
+
+
+// C++ evaluation of expression "-v1"
+void expr0(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				data.vres[j+k] = -v1;
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "v1 + v2"
 void expr1(ExprData &data) {
 	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
 		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
@@ -143,17 +175,536 @@ void expr1(ExprData &data) {
 			for(uint k = 0; k<data.simd_size; k++) {
 				double v1 = data.v1[j+k];
 				double v2 = data.v2[j+k];
-				double v3 = data.v3[j+k];
-				double v4 = data.v4[j+k];
-				data.vres[j+k] = v1 + v2 + v3 + v4 ;
+				data.vres[j+k] = v1 + v2 ;
 			}
 		}
 	}
 }
 
 
-// C++ evaluation of expression "3 * v1 + cs1 * v2 + v3 + 2.5 * v4"
+// C++ evaluation of expression "v1 - v2"
 void expr2(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				double v2 = data.v2[j+k];
+				data.vres[j+k] = v1 - v2;
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "v1 * v2"
+void expr3(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				double v2 = data.v2[j+k];
+				data.vres[j+k] = v1 * v2;
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "v1 / v2"
+void expr4(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				double v2 = data.v2[j+k];
+				data.vres[j+k] = v1 / v2;
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "v1 % v2"
+void expr5(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				double v2 = data.v2[j+k];
+				data.vres[j+k] = fmod(v1, v2);
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "v1 == v2"
+void expr6(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				double v2 = data.v2[j+k];
+				data.vres[j+k] = v1 == v2;
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "v1 != v2"
+void expr7(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				double v2 = data.v2[j+k];
+				data.vres[j+k] = v1 != v2;
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "v1 < v2"
+void expr8(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				double v2 = data.v2[j+k];
+				data.vres[j+k] = v1 < v2;
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "v1 <= v2"
+void expr9(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				double v2 = data.v2[j+k];
+				data.vres[j+k] = v1 <= v2;
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "v1 > v2"
+void expr10(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				double v2 = data.v2[j+k];
+				data.vres[j+k] = v1 > v2;
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "v1 >= v2"
+void expr11(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				double v2 = data.v2[j+k];
+				data.vres[j+k] = v1 >= v2;
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "not (v1 == v2)"
+void expr12(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				double v2 = data.v2[j+k];
+				data.vres[j+k] = !(v1 == v2);
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "v1 or v2"
+void expr13(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				double v2 = data.v2[j+k];
+				data.vres[j+k] = v1 || v2;
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "v1 and v2"
+void expr14(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				double v2 = data.v2[j+k];
+				data.vres[j+k] = v1 && v2;
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "abs(v1)"
+void expr15(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				data.vres[j+k] = abs(v1);
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "sqrt(v1)"
+void expr16(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				data.vres[j+k] = sqrt(v1);
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "exp(v1)"
+void expr17(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				data.vres[j+k] = exp(v1);
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "log(v1)"
+void expr18(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				data.vres[j+k] = log(v1);
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "log10(v1)"
+void expr19(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				data.vres[j+k] = log10(v1);
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "sin(v1)"
+void expr20(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				data.vres[j+k] = sin(v1);
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "sinh(v1)"
+void expr21(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				data.vres[j+k] = sinh(v1);
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "asin(v1)"
+void expr22(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				data.vres[j+k] = asin(v1);
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "cos(v1)"
+void expr23(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				data.vres[j+k] = cos(v1);
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "cosh(v1)"
+void expr24(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				data.vres[j+k] = cosh(v1);
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "acos(v1)"
+void expr25(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				data.vres[j+k] = acos(v1);
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "tan(v1)"
+void expr26(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				data.vres[j+k] = tan(v1);
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "tanh(v1)"
+void expr27(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				data.vres[j+k] = tanh(v1);
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "atan(v1)"
+void expr28(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				data.vres[j+k] = atan(v1);
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "ceil(v1)"
+void expr29(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				data.vres[j+k] = ceil(v1);
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "floor(v1)"
+void expr30(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				data.vres[j+k] = floor(v1);
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "isnan(v1)"
+void expr31(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				data.vres[j+k] = isnan(v1);
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "isinf(v1)"
+void expr32(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				data.vres[j+k] = isinf(v1);
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "sgn(v1)"
+void expr33(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				data.vres[j+k] = v1 > 0 ? 1.0 : (v1 < 0 ? -1.0 : 0.0);
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "atan2(v1, v2)"
+void expr34(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				double v2 = data.v2[j+k];
+				data.vres[j+k] = atan2(v1, v2);
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "v1 ** v2"
+void expr35(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				double v2 = data.v2[j+k];
+				data.vres[j+k] = pow(v1, v2);
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "maximum(v1, v2)"
+void expr36(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				double v2 = data.v2[j+k];
+				data.vres[j+k] = std::max(v1, v2);
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "minimum(v1, v2)"
+void expr37(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				double v2 = data.v2[j+k];
+				data.vres[j+k] = std::min(v1, v2);
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "v3 if v1 == v2 else v4"
+void expr38(ExprData &data) {
 	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
 		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
 			uint j = i_comp + data.simd_size*data.subset[i];
@@ -162,24 +713,99 @@ void expr2(ExprData &data) {
 				double v2 = data.v2[j+k];
 				double v3 = data.v3[j+k];
 				double v4 = data.v4[j+k];
-				data.vres[j+k] = 3 * v1  + data.cs1 * v2 + v3 + 2.5 * v4 ;
+				data.vres[j+k] = (v1 == v2) ? v3 : v4;
 			}
 		}
 	}
 }
 
 
-// C++ evaluation of expression "sin(v1)"
-void expr3(ExprData &data) {
+// C++ evaluation of expression "cv1 + v1"
+void expr39(ExprData &data) {
 	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
 		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
 			uint j = i_comp + data.simd_size*data.subset[i];
 			for(uint k = 0; k<data.simd_size; k++) {
 				double v1 = data.v1[j+k];
-				//double v2 = data.v2[j+k];
-				//double v3 = data.v3[j+k];
-				//double v4 = data.v4[j+k];
-				data.vres[j+k] = sin(v1);
+				double cv1 = data.cv1[i_comp/data.vec_size];
+				data.vres[j+k] = cv1 + v1;
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "cs1 - v1"
+void expr40(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				data.vres[j+k] = data.cs1 - v1;
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "cs1 * v1"
+void expr41(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				data.vres[j+k] = data.cs1 * v1;
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "cv1 / v1"
+void expr42(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				double cv1 = data.cv1[i_comp/data.vec_size];
+				data.vres[j+k] = cv1 / v1;
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "v1 + v2 + v3 + v4"
+void expr43(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				double v2 = data.v2[j+k];
+				double v3 = data.v3[j+k];
+				double v4 = data.v4[j+k];
+				data.vres[j+k] = v1 + v2 + v3 + v4;
+			}
+		}
+	}
+}
+
+
+// C++ evaluation of expression "3 * v1 + cs1 * v2 + v3 + 2.5 * v4"
+void expr44(ExprData &data) {
+	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
+		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
+			uint j = i_comp + data.simd_size*data.subset[i];
+			for(uint k = 0; k<data.simd_size; k++) {
+				double v1 = data.v1[j+k];
+				double v2 = data.v2[j+k];
+				double v3 = data.v3[j+k];
+				double v4 = data.v4[j+k];
+				data.vres[j+k] = 3 * v1 + data.cs1 * v2 + v3 + 2.5 * v4;
 			}
 		}
 	}
@@ -187,7 +813,7 @@ void expr3(ExprData &data) {
 
 
 // C++ evaluation of expression "[v2, v2, v2] @ v1 + v3"
-void expr4(ExprData &data) {
+void expr45(ExprData &data) {
 	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
 		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
 			uint j = i_comp + data.simd_size*data.subset[i];
@@ -197,11 +823,11 @@ void expr4(ExprData &data) {
 				double v3 = data.v3[j+k];
 				double v4 = data.v4[j+k];
 				data.vres[j+k] = std::min(v1, v2) + std::max(v3, v4);
-				//expression will be changed
 			}
 		}
 	}
 }
+
 
 
 /**
@@ -374,10 +1000,52 @@ void test_expr(std::string expr, uint block_size, void (* func)(ExprData&)) {
 void test_expression() {
 	std::vector<uint> block_sizes = {64, 256, 1024};
 	for (uint i=0; i<block_sizes.size(); ++i) {
-		test_expr("v1 + v2 + v3 + v4", block_sizes[i], &expr1);
-		test_expr("3 * v1 + cs1 * v2 + v3 + 2.5 * v4", block_sizes[i], &expr2);
-		test_expr("sin(v1)", block_sizes[i], &expr3);
-		test_expr("[v2, v2, v2] @ v1 + v3", block_sizes[i], &expr4); // correct expression
+		test_expr("-v1", block_sizes[i], &expr0);
+		test_expr("v1 + v2", block_sizes[i], &expr1);
+		test_expr("v1 - v2", block_sizes[i], &expr2);
+		test_expr("v1 * v2", block_sizes[i], &expr3);
+		test_expr("v1 / v2", block_sizes[i], &expr4);
+		test_expr("v1 % v2", block_sizes[i], &expr5);
+		test_expr("(v1 == v2)", block_sizes[i], &expr6);
+		test_expr("v1 != v2", block_sizes[i], &expr7);
+		test_expr("v1 < v2", block_sizes[i], &expr8);
+		test_expr("v1 <= v2", block_sizes[i], &expr9);
+		test_expr("v1 > v2", block_sizes[i], &expr10);
+		test_expr("v1 >= v2", block_sizes[i], &expr11);
+		test_expr("not (v1 == v2)", block_sizes[i], &expr12);
+		test_expr("v1 or v2", block_sizes[i], &expr13);
+		test_expr("v1 and v2", block_sizes[i], &expr14);
+		test_expr("abs(v1)", block_sizes[i], &expr15);
+		test_expr("sqrt(v1)", block_sizes[i], &expr16);
+		test_expr("exp(v1)", block_sizes[i], &expr17);
+		test_expr("log(v1)", block_sizes[i], &expr18);
+		test_expr("log10(v1)", block_sizes[i], &expr19);
+		test_expr("sin(v1)", block_sizes[i], &expr20);
+		test_expr("sinh(v1)", block_sizes[i], &expr21);
+		test_expr("asin(v1)", block_sizes[i], &expr22);
+		test_expr("cos(v1)", block_sizes[i], &expr23);
+		test_expr("cosh(v1)", block_sizes[i], &expr24);
+		test_expr("acos(v1)", block_sizes[i], &expr25);
+		test_expr("tan(v1)", block_sizes[i], &expr26);
+		test_expr("tanh(v1)", block_sizes[i], &expr27);
+		test_expr("atan(v1)", block_sizes[i], &expr28);
+		test_expr("ceil(v1)", block_sizes[i], &expr29);
+		test_expr("floor(v1)", block_sizes[i], &expr30);
+		test_expr("isnan(v1)", block_sizes[i], &expr31);
+		test_expr("isinf(v1)", block_sizes[i], &expr32);
+		test_expr("sgn(v1)", block_sizes[i], &expr33);
+		test_expr("atan2(v1, v2)", block_sizes[i], &expr34);
+		test_expr("v1 ** v2", block_sizes[i], &expr35);
+		test_expr("maximum(v1, v2)", block_sizes[i], &expr36);
+		test_expr("minimum(v1, v2)", block_sizes[i], &expr37);
+		test_expr("v3 if v1 == v2 else v4", block_sizes[i], &expr38);
+		test_expr("cv1 + v1", block_sizes[i], &expr39);
+		test_expr("cs1 - v1", block_sizes[i], &expr40);
+		test_expr("cs1 * v1", block_sizes[i], &expr41);
+		test_expr("cv1 / v1", block_sizes[i], &expr42);
+		test_expr("v1 + v2 + v3 + v4", block_sizes[i], &expr43);
+		test_expr("3 * v1 + cs1 * v2 + v3 + 2.5 * v4", block_sizes[i], &expr44);
+		test_expr("[v2, v2, v2] @ v1 + v3", block_sizes[i], &expr45);
 	}
 }
 
