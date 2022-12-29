@@ -18,6 +18,9 @@
 #undef MAX_VECTOR_SIZE
 #define MAX_VECTOR_SIZE 256
 
+#undef INSTRSET
+#define INSTRSET 8
+
 #include "vectorclass.h"
 
 //test if gnuc
