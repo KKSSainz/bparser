@@ -30,6 +30,12 @@ test_parser:
 	
 test_speed: 
 	cd build && make test_speed
+
+test_speed_cpp: 
+	cd build && make test_speed_cpp
+
+test_speed_parser: 
+	cd build && make test_speed_parser
 	 
 
 #test_design:
