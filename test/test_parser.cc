@@ -273,8 +273,8 @@ void test_expression() {
 
 	/**
 	 * All bool tests have defined:
-	 * v1 - scalar array == [88..134]
-	 * v2 - vector array == [100..123]
+	 * bv5 - vector array == [88..134]
+	 * bv6 - vector array == [100..123]
 	 */
 	std::cout << std::endl << "** test bool expression" << std::endl;
 	BP_ASSERT(test_expr("bv5 < bv6", {0,0,0}));
