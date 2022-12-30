@@ -183,56 +183,56 @@ void test_expression(std::string filename, uint simd_size)  {
 
 	for (uint i=0; i<block_sizes.size(); ++i) {
 		uint id_counter = 0;
-		test_expr("-v1", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++) + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("v1 + v2", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("v1 - v2", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("v1 * v2", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("v1 / v2", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("v1 % v2", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
+		test_expr("-v1", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("v1 + v2", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("v1 - v2", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("v1 * v2", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("v1 / v2", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("v1 % v2", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
 
-		test_expr("(v1 == v2)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("v1 != v2", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("v1 < v2", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("v1 <= v2", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("v1 > v2", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("v1 >= v2", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("not (v1 == v2)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("v1 or v2", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("v1 and v2", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
+		test_expr("(v1 == v2)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("v1 != v2", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("v1 < v2", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("v1 <= v2", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("v1 > v2", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("v1 >= v2", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("not (v1 == v2)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("v1 or v2", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("v1 and v2", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
 
-		test_expr("abs(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("sqrt(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("exp(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("log(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("log10(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
+		test_expr("abs(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("sqrt(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("exp(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("log(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("log10(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
 
-		test_expr("sin(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("sinh(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("asin(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("cos(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("cosh(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("acos(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("tan(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("tanh(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("atan(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("ceil(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("floor(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("isnan(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("isinf(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("sgn(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("atan2(v1, v2)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
+		test_expr("sin(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("sinh(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("asin(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("cos(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("cosh(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("acos(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("tan(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("tanh(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("atan(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("ceil(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("floor(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("isnan(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("isinf(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("sgn(v1)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("atan2(v1, v2)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
 
-		test_expr("v1 ** v2", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("maximum(v1, v2)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("minimum(v1, v2)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("v3 if v1 == v2 else v4", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("cv1 + v1", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("cs1 - v1", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("cs1 * v1", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("cv1 / v1", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("v1 + v2 + v3 + v4", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("3 * v1 + cs1 * v2 + v3 + 2.5 * v4", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
-		test_expr("[v2, v2, v2] @ v1 + v3", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++)  + "_" + std::to_string(block_sizes[i]), file);
+		test_expr("v1 ** v2", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("maximum(v1, v2)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("minimum(v1, v2)", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("v3 if v1 == v2 else v4", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("cv1 + v1", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("cs1 - v1", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("cs1 * v1", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("cv1 / v1", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("v1 + v2 + v3 + v4", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("3 * v1 + cs1 * v2 + v3 + 2.5 * v4", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
+		test_expr("[v2, v2, v2] @ v1 + v3", block_sizes[i], simd_size, "TEST_" + std::to_string(id_counter++), file);
 	}
 }
 
