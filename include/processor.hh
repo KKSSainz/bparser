@@ -480,7 +480,7 @@ struct Processor : public ProcessorBase {
 
 
 template <class VCLVec> 
-ProcessorBase * create_processor_(ExpressionDAG &se, uint vector_size,  uint simd_size, ArenaAllocPtr arena)
+ProcessorBase * create_processor_(ExpressionDAG &se, uint vector_size, uint simd_size, ArenaAllocPtr arena)
 {
     uint simd_bytes = sizeof(double) * simd_size;
     ExpressionDAG::NodeVec & sorted_nodes = se.sort_nodes();

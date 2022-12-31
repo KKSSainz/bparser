@@ -15,8 +15,8 @@
 
 // #include "vectorclass.h"
 
-#include "vectormath_exp.h"
 #include "vectormath_hyp.h"
+#include "vectormath_exp.h"
 #include "vectormath_trig.h"
 
 //test if gnuc
