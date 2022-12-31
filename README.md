@@ -10,7 +10,7 @@ Features:
 
 ## Build
 SIMD instructions in particular AVX is supported from certain versions of compilers, e.g.
-GCC 4.6, Clang 3.5
+GCC 7, Clang 5.0
 
 ## Usage:
 
