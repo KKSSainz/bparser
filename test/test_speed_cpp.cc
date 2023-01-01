@@ -643,58 +643,65 @@ void expr38(ExprData &data) {
 }
 
 
-// C++ evaluation of expression "cv1 + v1"
+// C++ evaluation of expression "cv1 + v1 + v2 - v3"
 void expr39(ExprData &data) {
 	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
 		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
 			uint j = i_comp + data.simd_size*data.subset[i];
 			for(uint k = 0; k<data.simd_size; k++) {
 				double v1 = data.v1[j+k];
+				double v2 = data.v2[j+k];
+				double v3 = data.v3[j+k];
 				double cv1 = data.cv1[i_comp/data.vec_size];
-				data.vres[j+k] = cv1 + v1;
+				data.vres[j+k] = cv1 + v1 + v2 - v3;
 			}
 		}
 	}
 }
 
 
-// C++ evaluation of expression "cs1 - v1"
+// C++ evaluation of expression "cs1 - v1 + v2 * v3"
 void expr40(ExprData &data) {
 	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
 		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
 			uint j = i_comp + data.simd_size*data.subset[i];
 			for(uint k = 0; k<data.simd_size; k++) {
 				double v1 = data.v1[j+k];
-				data.vres[j+k] = data.cs1 - v1;
+				double v2 = data.v2[j+k];
+				double v3 = data.v3[j+k];
+				data.vres[j+k] = data.cs1 - v1 + v2 * v3;
 			}
 		}
 	}
 }
 
 
-// C++ evaluation of expression "cs1 * v1"
+// C++ evaluation of expression "cs1 * v1 / v2"
 void expr41(ExprData &data) {
 	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
 		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
 			uint j = i_comp + data.simd_size*data.subset[i];
 			for(uint k = 0; k<data.simd_size; k++) {
 				double v1 = data.v1[j+k];
-				data.vres[j+k] = data.cs1 * v1;
+				double v2 = data.v2[j+k];
+				data.vres[j+k] = data.cs1 * v1 / v2;
 			}
 		}
 	}
 }
 
 
-// C++ evaluation of expression "cv1 / v1"
+// C++ evaluation of expression "cv1 / v1 * v2 / v3"
 void expr42(ExprData &data) {
 	for(uint i_comp=0; i_comp < 3*data.vec_size; i_comp += data.vec_size) {
 		for(uint i=0; i<data.vec_size/data.simd_size; ++i) {
 			uint j = i_comp + data.simd_size*data.subset[i];
 			for(uint k = 0; k<data.simd_size; k++) {
 				double v1 = data.v1[j+k];
+				double v2 = data.v2[j+k];
+				double v3 = data.v3[j+k];
 				double cv1 = data.cv1[i_comp/data.vec_size];
-				data.vres[j+k] = cv1 / v1;
+				data.vres[j+k] = cv1 / v1 * v2 / v3;
 			}
 		}
 	}
@@ -833,6 +840,7 @@ void test_expression(std::string filename)  {
 		test_expr("v1 - v2", block_sizes[i], std::to_string(id_counter++), file, &expr2);
 		test_expr("v1 * v2", block_sizes[i], std::to_string(id_counter++), file, &expr3);
 		test_expr("v1 / v2", block_sizes[i], std::to_string(id_counter++), file, &expr4);
+		test_expr("v1 % v2", block_sizes[i], std::to_string(id_counter++), file, &expr5);
 
 		test_expr("(v1 == v2)", block_sizes[i], std::to_string(id_counter++), file, &expr6);
 		test_expr("v1 != v2", block_sizes[i], std::to_string(id_counter++), file, &expr7);
@@ -844,7 +852,6 @@ void test_expression(std::string filename)  {
 		test_expr("v1 or v2", block_sizes[i], std::to_string(id_counter++), file, &expr13);
 		test_expr("v1 and v2", block_sizes[i], std::to_string(id_counter++), file, &expr14);
 
-		test_expr("v1 % v2", block_sizes[i], std::to_string(id_counter++), file, &expr5);
 		test_expr("abs(v1)", block_sizes[i], std::to_string(id_counter++), file, &expr15);
 		test_expr("sqrt(v1)", block_sizes[i], std::to_string(id_counter++), file, &expr16);
 		test_expr("exp(v1)", block_sizes[i], std::to_string(id_counter++), file, &expr17);
@@ -868,12 +875,12 @@ void test_expression(std::string filename)  {
 		test_expr("v1 ** v2", block_sizes[i], std::to_string(id_counter++), file, &expr35);
 		test_expr("maximum(v1, v2)", block_sizes[i], std::to_string(id_counter++), file, &expr36);
 		test_expr("minimum(v1, v2)", block_sizes[i], std::to_string(id_counter++), file, &expr37);
-		test_expr("v3 if v1 == v2 else v4", block_sizes[i], std::to_string(id_counter++), file, &expr38);
 
-		test_expr("cv1 + v1", block_sizes[i], std::to_string(id_counter++), file, &expr39);
-		test_expr("cs1 - v1", block_sizes[i], std::to_string(id_counter++), file, &expr40);
-		test_expr("cs1 * v1", block_sizes[i], std::to_string(id_counter++), file, &expr41);
-		test_expr("cv1 / v1", block_sizes[i], std::to_string(id_counter++), file, &expr42);
+		test_expr("v3 if v1 == v2 else v4", block_sizes[i], std::to_string(id_counter++), file, &expr38);
+		test_expr("cv1 + v1 + v2 - v3", block_sizes[i], std::to_string(id_counter++), file, &expr39);
+		test_expr("cs1 - v1 + v2 * v3", block_sizes[i], std::to_string(id_counter++), file, &expr40);
+		test_expr("cs1 * v1 / v2", block_sizes[i], std::to_string(id_counter++), file, &expr41);
+		test_expr("cv1 / v1 * v2 / v3", block_sizes[i], std::to_string(id_counter++), file, &expr42);
 		test_expr("v1 + v2 + v3 + v4", block_sizes[i], std::to_string(id_counter++), file, &expr43);
 		test_expr("3 * v1 + cs1 * v2 + v3 + 2.5 * v4", block_sizes[i], std::to_string(id_counter++), file, &expr44);
 		// test_expr("[v2, v2, v2] @ v1 + v3", block_sizes[i], std::to_string(id_counter++), file, &expr45);
