@@ -766,7 +766,7 @@ void test_expr(std::string expr, uint block_size, std::string expr_id, std::ofst
 	uint vec_size = 1*block_size;
 	uint simd_size = 8; // TODO 
 
-	uint n_repeats = (1024 / block_size) * 10000;
+	uint n_repeats = (1024 / block_size) * 100000;
 
 	// TODO: allow changing variable pointers, between evaluations
 	// e.g. p.set_variable could return pointer to that pointer
