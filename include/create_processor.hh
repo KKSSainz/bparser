@@ -15,7 +15,7 @@ namespace bparser{
         {
             return 4;
         }
-        else if (i_set >= 5) // min SSE4.1
+        else if (i_set >= 2) // min SSE4.1
         {
             return 2;
         }
